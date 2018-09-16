@@ -1,0 +1,19 @@
+---
+- name: Installation d'Apache
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ apache_packages }}"
+
+- name: Installation de PHP
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ php_packages_1 }}"
+
+- name: Installation de PHP - suite
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ php_packages_2 }}"
+  

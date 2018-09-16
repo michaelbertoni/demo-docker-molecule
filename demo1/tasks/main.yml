@@ -1,0 +1,12 @@
+---
+# tasks file for demo1
+- name: Installation d'Apache
+  package:
+    name: "httpd"
+    state: present
+
+- name: Lancement d'Apache
+  service:
+    name: "httpd"
+    state: started
+    enabled: true

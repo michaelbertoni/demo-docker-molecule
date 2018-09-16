@@ -1,0 +1,22 @@
+---
+- name: Installation d'Apache
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ apache_packages }}"
+
+- name: Activation du repository SCL pour PHP7 (CentOS)
+  yum:
+    name: "{{ scl_centos_package }}"
+    state: present
+  when: ansible_distribution == 'CentOS'
+
+- name: Activation du repository SCL pour PHP7 (RedHat)
+  command: "{{ scl_redhat_command }}"
+  when: ansible_distribution == 'RedHat'
+
+- name: Installation de PHP
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ php_packages }}"

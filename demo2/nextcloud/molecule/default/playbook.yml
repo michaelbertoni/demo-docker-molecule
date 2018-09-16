@@ -1,0 +1,5 @@
+---
+- name: Converge
+  hosts: nextcloud-molecule
+  roles:
+    - role: nextcloud
