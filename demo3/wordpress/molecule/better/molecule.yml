@@ -7,20 +7,18 @@ lint:
   name: yamllint
 platforms:
   - name: instance
-    image: centos:7
-    command: /sbin/init
-    capabilities:
-      - SYS_ADMIN
-    tmpfs:
-      - /run
+    image: docker:dind
+    privileged: yes
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /var/lib/docker
+    published_ports:
+      - 0.0.0.0:12375:2375
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: default
+  name: better
 verifier:
   name: testinfra
   lint:

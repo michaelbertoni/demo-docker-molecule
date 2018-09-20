@@ -1,0 +1,12 @@
+---
+# tasks file for wordpress
+- name: Get docker-compose.yml
+  copy:
+    src: docker-compose.yml
+    dest: /tmp/docker-compose.yml
+
+- name: Run docker-compose pull
+  command: "docker-compose -f /tmp/docker-compose.yml pull"
+
+- name: Run docker-compose up -d
+  command: "docker-compose -f /tmp/docker-compose.yml up -d"
