@@ -7,14 +7,9 @@ lint:
   name: yamllint
 platforms:
   - name: instance
-    image: gitlab/dind
-    privileged: yes
+    image: docker:dind
     volumes:
-      - /var/lib/docker
-    published_ports:
-      - 4444:4444
-    env:
-      PORT: 4444
+      - /var/run/docker.sock:/var/run/docker.sock
 provisioner:
   name: ansible
   lint:

@@ -1,12 +1,38 @@
 ---
 # tasks file for wordpress
-- name: Get docker-compose.yml
-  copy:
-    src: docker-compose.yml
-    dest: /tmp/docker-compose.yml
+- name: git clone
+  git:
+    repo: https://github.com/michaelbertoni/wordpress-docker-compose.git
+    dest: /tmp/wordpress/
+    version: master
 
-- name: Run docker-compose pull
-  command: "docker-compose -f /tmp/docker-compose.yml pull"
+- name: check if /tmp/wordpress/docker-compose.yml is present
+  stat:
+    path: /tmp/wordpress/docker-compose.yml
+  register: docker_compose_file
 
-- name: Run docker-compose up -d
-  command: "docker-compose -f /tmp/docker-compose.yml up -d"
+- name: fail if there is no docker-compose.yml
+  fail:
+    msg: "Pas de docker-compose.yml, pas de wordpress mon gars"
+  when: docker_compose_file.stat.exists == False
+
+- name: Create db_data volume
+  docker_volume:
+    name: wordpress_db_data
+    state: present
+
+- name: docker-compose pull && docker-compose up -d
+  docker_service:
+    project_src: /tmp/wordpress/
+    pull: true
+    state: present
+
+- name: healthcheck wordpress
+  uri:
+    url: http://localhost:8000
+    status_code: 200
+  register: result
+  until: result.status == 200
+  retries: 60
+  delay: 1
+  delegate_to: localhost
