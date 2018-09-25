@@ -7,7 +7,7 @@ lint:
   name: yamllint
 platforms:
   - name: instance
-    image: docker:dind
+    image: docker:18.06.1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 provisioner:

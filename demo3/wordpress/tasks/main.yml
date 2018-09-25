@@ -36,3 +36,14 @@
   retries: 60
   delay: 1
   delegate_to: localhost
+
+- name: wordpress configuré
+  uri:
+    url: http://localhost:8000/wp-admin/install.php?step=2
+    method: POST
+    body: "weblog_title=test&user_name=test&admin_email=test@test.fr&admin_password=test&admin_password2=test&pw_weak=1"
+  register: result
+  until: result.status == 200
+  retries: 60
+  delay: 1
+  delegate_to: localhost
