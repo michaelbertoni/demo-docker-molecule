@@ -1,8 +1,0 @@
----
-# vars file for apache
-apache2_modules:
-  - rewrite
-  - headers
-  - env
-  - dir
-  - mime
