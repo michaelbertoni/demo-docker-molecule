@@ -1,2 +1,4 @@
 ---
 # defaults file for demo1
+package_name: "httpd"
+service_name: "httpd"

@@ -1,12 +1,14 @@
 ---
 # tasks file for demo1
-- name: Installation d'Apache
+- name: Le paquet apache est installé
   package:
-    name: "httpd"
+    name: "{{ package_name }}"
     state: present
+  notify:
+    - restart apache
 
-- name: Lancement d'Apache
+- name: Le service apache est lancé et activé au démarrage
   service:
-    name: "httpd"
+    name: "{{ service_name }}"
     state: started
     enabled: true
