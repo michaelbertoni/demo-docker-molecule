@@ -10,6 +10,9 @@ platforms:
     image: solita/ubuntu-systemd:latest
     capabilities:
       - SYS_ADMIN
+    tmpfs:
+      - /run
+      - /run/lock
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     command: /sbin/init
@@ -19,6 +22,9 @@ platforms:
     image: solita/ubuntu-systemd:latest
     capabilities:
       - SYS_ADMIN
+    tmpfs:
+      - /run
+      - /run/lock
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     command: /sbin/init
@@ -28,6 +34,9 @@ platforms:
     image: solita/ubuntu-systemd:latest
     capabilities:
       - SYS_ADMIN
+    tmpfs:
+      - /run
+      - /run/lock
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     command: /sbin/init
